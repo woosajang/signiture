@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Copy with Consent and Redirect Example</title>
+</head>
+<body>
+
+    <p id="copyText">#시그니처키친스위트 #시그니처키친스위트x안서리베이킹랩</p>
+    <button id="copyButton">동의하고 복사하기</button>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var copyElement = document.getElementById('copyText');
+            var copyButton = document.getElementById('copyButton');
+
+            function copyToClipboard(text) {
+                var textArea = document.createElement('textarea');
+                textArea.value = text;
+                document.body.appendChild(textArea);
+                textArea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textArea);
+            }
+
+            function redirectToSite(url) {
+                window.location.href = url;
+            }
+
+            copyButton.addEventListener('click', function () {
+                if (confirm('이 내용을 클립보드에 복사하시겠습니까?')) {
+                    copyToClipboard(copyElement.innerText);
+                    alert('복사되었습니다!');
+                    
+                    // 클립보드에 복사한 후, 3초 뒤에 원하는 사이트로 이동
+                    setTimeout(function () {
+                        redirectToSite('https://instagram.com/signature_kitchen_suite'); // 원하는 사이트 주소로 변경
+                    }, 1000);
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>
